@@ -4,7 +4,7 @@
 import os
 import unittest
 import pytest
-from lib.csv_processing import CSVParser
+from csv_utils import CSVParser
 
 RESOURCE_BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 class TestCSVProcessing(unittest.TestCase):
