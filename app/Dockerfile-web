@@ -1,0 +1,7 @@
+FROM python:3
+ADD requirements-web.txt requirements.txt
+RUN pip3 install -r requirements.txt
+ADD ./db /app/db
+ADD ./web /app/web
+WORKDIR /app
+ENTRYPOINT flask run --host=0.0.0.0
