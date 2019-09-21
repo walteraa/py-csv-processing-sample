@@ -1,0 +1,8 @@
+FROM python:3
+ADD requirements-celery.txt requirements.txt
+RUN pip3 install -r requirements.txt
+ADD ./celery_app /app/celery_app
+ADD ./db /app/db
+ADD ./twitter_searcher /app/twitter_searcher
+ADD ./web /app/web
+WORKDIR /app
