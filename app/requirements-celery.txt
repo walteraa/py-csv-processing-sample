@@ -1,5 +1,4 @@
 celery
 pymongo
-python-twitter
 requests_oauthlib
 twython
