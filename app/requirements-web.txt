@@ -1,0 +1,6 @@
+celery
+pymongo
+python-twitter
+requests_oauthlib
+flask
+pyexcel
