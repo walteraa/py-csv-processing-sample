@@ -1,5 +1,5 @@
 import os
-from pymongo import MongoClient
+from pymongo import MongoClient, DESCENDING as DESC, ASCENDING as ASC
 from bson.objectid import ObjectId
 
 
@@ -38,5 +38,6 @@ class Database:
 
     @with_connection
     def all(self, db):
-        return db.apple_collection.find({})
-
+        return db.apple_collection.find({}).sort([("mentions", DESC),
+                                                  ("count", DESC),
+                                                  ("name", ASC)])
