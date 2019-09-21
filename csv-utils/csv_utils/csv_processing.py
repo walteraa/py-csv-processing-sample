@@ -1,4 +1,5 @@
 import csv, heapq
+
 class CSVParser:
     '''
         Class which represents the CSV parser
@@ -42,7 +43,9 @@ class CSVParser:
                 data = map(lambda row: {'name': row[2],
                                         'count': row[6],
                                         'id': row[0],
-                                        'type': row[12]},
+                                        'type': row[12],
+                                        'size_bytes': row[3],
+                                        'price': row[5]},
                            heapq.nlargest(list_size,
                                           filter(lambda e: e[12] in categories,
                                                  reader
