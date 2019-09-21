@@ -1,0 +1,15 @@
+FROM python:3
+ADD ./csv-utils ./app/csv-utils
+
+ADD ./cli/requirements-cli.txt ./app/requirements.txt 
+
+RUN pip install -r /app/requirements.txt
+RUN pip install /app/csv-utils
+
+ADD ./cli/main.py /app/main.py
+ADD ./app/celery_app /app/celery_app
+ADD ./app/db /app/db
+ADD ./app/twitter_searcher /app/twitter_searcher
+
+WORKDIR /app
+ENTRYPOINT ["tail", "-f", "/dev/null"]

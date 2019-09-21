@@ -46,9 +46,6 @@ services:
       context: ./app
       dockerfile: Dockerfile-celery
     command: celery -A celery_app worker --loglevel=info
-    volumes:
-        - ./resources:/resources
-        - ./csv-utils:/packages/csv-utils
 
     environment:
       - MONGO_HOST=db
@@ -89,7 +86,33 @@ services:
       integration_network:
         aliases:
           - &webapp_host webapp
+  cli:
+    build:
+      context: .
+      dockerfile: Dockerfile-cli
+    environment:
+      - BROKER_HOST=broker
+      - BROKER_USER=admin
+      - BROKER_PASS=mypass
+      - MONGO_HOST=db
+      - MONGO_PORT=27017
+      - TWITTER_CONSUMER_KEY=${TWITTER_CONSUMER_KEY}
+      - TWITTER_CONSUMER_SECRET=${TWITTER_CONSUMER_SECRET}
+      - TWITTER_TOKEN_KEY=${TWITTER_TOKEN_KEY}
+      - TWITTER_TOKEN_SECRET=${TWITTER_TOKEN_SECRET}
+    volumes:
+        - ./resources:/app/resources
 
+    links:
+      - broker
+      - db
+    depends_on:
+      - broker
+      - db
+    networks:
+      integration_network:
+        aliases:
+          - &cli_host cli
 
 networks:
   integration_network:
